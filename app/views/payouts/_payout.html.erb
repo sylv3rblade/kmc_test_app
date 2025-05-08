@@ -8,6 +8,6 @@
     </span>
   </td>
   <td class="px-6 py-4">
-    <%= link_to 'Send Payment', send_payment_payout_path(payout), method: :post, class: 'text-blue-500 hover:text-blue-700' %>
+    <%= link_to('Send Payment', send_payment_payout_path(payout), method: :post, class: 'text-blue-500 hover:text-blue-700') unless payout.paid? %>
   </td>
 </tr>
