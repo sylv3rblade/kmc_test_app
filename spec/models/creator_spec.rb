@@ -33,4 +33,22 @@ RSpec.describe Creator, type: :model do
       expect(payout.creator).to eq(creator)
     end
   end
+
+  describe '.with_payouts_summary' do
+    it 'returns total paid amount and pending payouts count per creator' do
+      creator = create(:creator)
+
+      create(:payout, creator:, amount: 100, status: 'paid')
+      create(:payout, creator:, amount: 200, status: 'paid')
+      create(:payout, creator:, amount: 300, status: 'pending')
+
+      result = Creator.with_payouts_summary.find(creator.id)
+
+      expect(result.total_paid_amount.to_f).to eq(300.0)
+      expect(result.pending_payouts_count.to_i).to eq(1)
+
+      expect(result.total_paid_amount.to_f).to eq(300.0)
+      expect(result.pending_payouts_count.to_i).to eq(1)
+    end
+  end
 end

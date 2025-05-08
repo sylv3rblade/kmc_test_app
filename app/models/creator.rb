@@ -4,4 +4,12 @@ class Creator < ApplicationRecord
   enum :status, { active: "active", inactive: "inactive" }, validate: true
 
   validates :name, :email, :status, presence: true
+
+  scope :with_payouts_summary, -> {
+    left_joins(:payouts)
+      .select('creators.*',
+              "SUM(CASE WHEN payouts.status = 'paid' THEN payouts.amount ELSE 0 END) AS total_paid_amount",
+              "COUNT(CASE WHEN payouts.status = 'pending' THEN 1 ELSE NULL END) AS pending_payouts_count")
+      .group(:id)
+  }
 end
