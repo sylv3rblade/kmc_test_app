@@ -6,6 +6,6 @@ class Payout < ApplicationRecord
   validates :amount, :status, presence: true
 
   def mark_as_paid
-    update(status: 'paid')
+    update(status: 'paid', paid_at: DateTime.now)
   end
 end

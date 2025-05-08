@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Payout, type: :model do
+  include ActiveSupport::Testing::TimeHelpers
+
   describe "validations" do
     it "is valid with valid attributes" do
       payout = build(:payout)
@@ -38,8 +40,13 @@ RSpec.describe Payout, type: :model do
     let(:payout) { create(:payout, status: 'pending') }
 
     it 'updates the status to paid' do
-      payout.mark_as_paid
-      expect(payout.status).to eq('paid')
+      freeze_time do
+        payout.mark_as_paid
+        payout.reload
+
+        expect(payout.status).to eq('paid')
+        expect(payout.paid_at).to eq(Time.current)
+      end
     end
   end
 end
