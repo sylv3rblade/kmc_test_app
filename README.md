@@ -26,6 +26,7 @@ Things you may want to cover:
 - Ruby 3.4.1
 - Rails 8.0.2
 - Postgresql
+- Redis
 
 ## Initial setup
 ```
@@ -35,8 +36,10 @@ rails db:setup
 
 ## Running locally
 ```
+#run each one individually
 rails tailwindcss:watch
 rails s
+sidekiq
 
 or simply use foreman
 bin/dev
