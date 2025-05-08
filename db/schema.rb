@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_08_114034) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_133241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_114034) do
 
   create_table "payouts", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2
-    t.string "status"
+    t.string "status", default: "pending"
     t.datetime "paid_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
