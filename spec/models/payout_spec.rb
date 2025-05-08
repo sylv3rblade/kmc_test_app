@@ -33,4 +33,13 @@ RSpec.describe Payout, type: :model do
       expect(creator.payouts).to include(payout)
     end
   end
+
+  describe '#mark_as_paid' do
+    let(:payout) { create(:payout, status: 'pending') }
+
+    it 'updates the status to paid' do
+      payout.mark_as_paid
+      expect(payout.status).to eq('paid')
+    end
+  end
 end
