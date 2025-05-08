@@ -18,5 +18,19 @@ RSpec.describe Payout, type: :model do
       expect(payout).not_to be_valid
       expect(payout.errors[:status]).to include("can't be blank")
     end
+
+    it "is not valid without a creator" do
+      payout = build(:payout, creator: nil)
+      expect(payout).not_to be_valid
+      expect(payout.errors[:creator]).to include("must exist")
+    end
+  end
+
+  describe "associations" do
+    it "has many payouts" do
+      creator = create(:creator)
+      payout = create(:payout, creator: creator)
+      expect(creator.payouts).to include(payout)
+    end
   end
 end

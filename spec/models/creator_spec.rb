@@ -25,4 +25,12 @@ RSpec.describe Creator, type: :model do
       expect(creator.errors[:status]).to include("can't be blank")
     end
   end
+
+  describe "associations" do
+    it "belongs to creator" do
+      creator = create(:creator)
+      payout = create(:payout, creator: creator)
+      expect(payout.creator).to eq(creator)
+    end
+  end
 end

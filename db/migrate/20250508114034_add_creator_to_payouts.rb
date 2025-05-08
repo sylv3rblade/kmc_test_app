@@ -1,0 +1,5 @@
+class AddCreatorToPayouts < ActiveRecord::Migration[8.0]
+  def change
+    add_reference :payouts, :creator, null: false, foreign_key: true
+  end
+end
