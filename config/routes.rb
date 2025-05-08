@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       post :send_payment
     end
   end
-  resources :creators
+  resources :creators do
+    resources :payouts, only: [:new, :create], controller: 'creators/payouts'
+  end
   # root "posts#index"
 end

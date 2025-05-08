@@ -9,6 +9,7 @@
   <td class="px-6 py-4">
   <%= link_to 'Edit', edit_creator_path(creator), class: 'text-blue-500 hover:text-blue-700' %> |
   <%= link_to 'Show', creator_path(creator), class: 'text-green-500 hover:text-green-700' %> |
+  <%= link_to 'Add Payout', new_creator_payout_path(creator), class: 'text-yellow-500 hover:text-yellow-700' %> |
   <%= link_to 'Delete', creator_path(creator), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'text-red-500 hover:text-red-700' %>
   </td>
 </tr>
