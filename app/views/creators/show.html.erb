@@ -1,0 +1,31 @@
+<h1 class="text-3xl font-semibold text-gray-800 mb-6">Creator Details</h1>
+
+<div class="bg-white shadow-md rounded-lg p-6 mb-4 w-full">
+  <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+    <div>
+      <dt class="text-sm font-medium text-gray-500">Name</dt>
+      <dd class="mt-1 text-lg text-gray-900"><%= @creator.name %></dd>
+    </div>
+
+    <div>
+      <dt class="text-sm font-medium text-gray-500">Email</dt>
+      <dd class="mt-1 text-lg text-gray-900"><%= @creator.email %></dd>
+    </div>
+
+    <div>
+      <dt class="text-sm font-medium text-gray-500">Status</dt>
+      <dd class="mt-1 text-lg text-gray-900">
+        <% if @creator.status == "active" %>
+          <span class="text-green-500 font-semibold">Active</span>
+        <% else %>
+          <span class="text-red-500 font-semibold">Inactive</span>
+        <% end %>
+      </dd>
+    </div>
+  </dl>
+</div>
+
+<div class="flex space-x-2">
+  <%= link_to 'Edit', edit_creator_path(@creator), class: "bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600" %>
+  <%= link_to 'Back', creators_path, class: "bg-gray-300 text-gray-800 px-4 py-2 rounded-md shadow hover:bg-gray-400" %>
+</div>

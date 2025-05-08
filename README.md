@@ -22,3 +22,27 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+## Dependencies
+- Ruby 3.4.1
+- Rails 8.0.2
+- Postgresql
+
+## Initial setup
+```
+bundle install
+rails db:setup
+```
+
+## Running locally
+```
+rails tailwindcss:watch
+rails s
+
+or simply use foreman
+bin/dev
+```
+
+## Running tests
+```
+bin/rspec
+```
