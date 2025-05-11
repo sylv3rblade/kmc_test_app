@@ -1,5 +1,6 @@
 class CreatorsController < ApplicationController
   before_action :set_creator, only: [:show, :edit, :update, :destroy]
+  before_action :creator_count, only: [:create, :update]
 
   def index
     @creators = Creator.all
@@ -13,11 +14,19 @@ class CreatorsController < ApplicationController
   end
 
   def create
-    @creator = Creator.create(creator_params)
-    creator_count
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @creator, notice: 'Creator was successfully deleted.' }
+    @creator = Creator.new(creator_params)
+
+    if @creator.save
+      @index = index + 1 # because we called before save
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @creator, notice: 'Creator was successfully deleted.' }
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream { render :form, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -25,12 +34,16 @@ class CreatorsController < ApplicationController
   end
 
   def update
-    @creator.update(creator_params)
-    # assumes happy path for now
-    creator_count
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @creator, notice: 'Creator was successfully updated.' }
+    if @creator.update(creator_params)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @creator, notice: 'Creator was successfully updated.' }
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream { render :form, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "creator_form" do %>
+  <%= turbo_frame_tag 'creator_form' do %>
+    <%= render 'form', creator: @creator %>
+  <% end %>
+<% end %>
