@@ -12,7 +12,7 @@
       </tr>
     </thead>
 
-    <tbody>
+    <tbody  id="payout_list">
       <% @payouts.each_with_index do |payout, index| %>
         <%= render partial: "payout", locals: { payout: payout, index: index } %>
       <% end %>

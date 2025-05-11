@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@payout) do %>
+  <%= render partial: "payout", locals: { payout: @payout, index: @index } %>
+<% end %>

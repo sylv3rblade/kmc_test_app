@@ -1,4 +1,4 @@
-<tr class="<%= 'bg-gray-50' if index.even? %> <%= 'bg-gray-100' if index.odd? %> border-t border-b border-gray-200">
+<tr id="<%= dom_id(payout) %>" class="<%= 'bg-gray-50' if index.even? %> <%= 'bg-gray-100' if index.odd? %> border-t border-b border-gray-200">
   <td class="px-6 py-4 text-gray-800"><%= payout.id %></td>
   <td class="px-6 py-4 text-gray-800"><%= payout.creator.name %></td>
   <td class="px-6 py-4 text-gray-800"><%= payout.amount %></td>
@@ -8,6 +8,6 @@
     </span>
   </td>
   <td class="px-6 py-4">
-    <%= link_to('Send Payment', send_payment_payout_path(payout), method: :post, class: 'text-blue-500 hover:text-blue-700') unless payout.paid? %>
+    <%= link_to('Send Payment', send_payment_payout_path(payout), data: { turbo_frame: dom_id(payout) }, method: :post, class: 'text-blue-500 hover:text-blue-700') unless payout.paid? %>
   </td>
 </tr>

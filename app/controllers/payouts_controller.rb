@@ -7,7 +7,11 @@ class PayoutsController < ApplicationController
 
   def send_payment
     SendPaymentJob.new.perform(@payout)
-    redirect_to payouts_url, notice: 'Payout successfully enqueued'
+    @index = Payout.count - 1 # not ideal but works for presentation
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to payouts_url, notice: 'Payout successfully enqueued' }
+    end
   end
 
   private
