@@ -21,6 +21,5 @@ Rails.application.routes.draw do
   resources :creators do
     resources :payouts, only: [:new, :create], controller: 'creators/payouts'
   end
-  get "dashboard" => "dashboard#index"
-  # root "posts#index"
+  root "dashboard#index"
 end
