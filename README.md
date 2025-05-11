@@ -22,7 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-## Dependencies
+## Required dependencies
 - Ruby 3.4.1
 - Rails 8.0.2
 - Postgresql
@@ -42,10 +42,15 @@ rails s
 sidekiq
 
 or simply use foreman
-bin/dev
+bin/dev # need to use pry-remote for binding.pry to work
 ```
 
 ## Running tests
 ```
 bin/rspec
 ```
+
+## extra notes
+there is a bug with updating the creator, because i'm using the creator count as the index temporarily (havent thought of a good way to handle it), when you render it's fine but when you update the creator, it might not match the correct odd/even class
+
+
