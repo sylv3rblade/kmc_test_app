@@ -1,23 +1,26 @@
-<h1 class="text-3xl font-semibold text-gray-800 mb-6">All Creators</h1>
+<%= turbo_frame_tag "creators" do %>
+  <h1 class="text-3xl font-semibold text-gray-800 mb-6">All Creators</h1>
 
-<%= link_to 'New Creator', new_creator_path, class: 'bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 mb-4 inline-block' %>
+  <%= render partial: "new_creator_button" %>
 
-<div class="overflow-x-auto bg-white shadow-md rounded-lg">
-  <table class="min-w-full table-auto">
-    <thead>
-      <tr class="bg-gray-100 text-left">
-        <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">ID</th>
-        <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Name</th>
-        <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Email</th>
-        <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Status</th>
-        <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Actions</th>
-      </tr>
-    </thead>
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+    <table class="min-w-full table-auto">
+      <thead>
+        <tr class="bg-gray-100 text-left">
+          <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">ID</th>
+          <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Name</th>
+          <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Email</th>
+          <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Status</th>
+          <th class="px-6 py-3 font-semibold text-sm text-gray-700 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <% @creators.each_with_index do |creator, index| %>
-        <%= render partial: "creator", locals: { creator: creator, index: index } %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      <tbody id="creator_list">
+        <% @creators.each_with_index do |creator, index| %>
+          <%= render partial: "creator", locals: { creator: creator, index: index } %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% end %>

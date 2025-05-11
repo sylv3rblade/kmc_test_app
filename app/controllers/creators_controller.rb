@@ -13,11 +13,11 @@ class CreatorsController < ApplicationController
   end
 
   def create
-    @creator = Creator.new(creator_params)
-    if @creator.save
-      redirect_to @creator, notice: 'Creator was successfully created.'
-    else
-      render :new
+    @creator = Creator.create(creator_params)
+    creator_count
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @creator, notice: 'Creator was successfully deleted.' }
     end
   end
 
@@ -25,16 +25,22 @@ class CreatorsController < ApplicationController
   end
 
   def update
-    if @creator.update(creator_params)
-      redirect_to @creator, notice: 'Creator was successfully updated.'
-    else
-      render :edit
+    @creator.update(creator_params)
+    # assumes happy path for now
+    creator_count
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @creator, notice: 'Creator was successfully updated.' }
     end
   end
 
   def destroy
     @creator.destroy
-    redirect_to creators_url, notice: 'Creator was successfully destroyed.'
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to creators_path, notice: 'Creator was successfully deleted.' }
+    end
   end
 
   private
@@ -45,5 +51,9 @@ class CreatorsController < ApplicationController
 
   def creator_params
     params.require(:creator).permit(:name, :email, :status)
+  end
+
+  def creator_count
+    @index = Creator.count - 1 # not ideal but works for presentation
   end
 end

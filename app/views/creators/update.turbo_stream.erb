@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "creator_form" do %>
+  <%= render partial: "new_creator_button" %>
+<% end %>
+<%= turbo_stream.append 'creator_list' do %>
+  <%= render partial: "creator", locals: { creator: @creator, index: @index } %>
+<% end %>
