@@ -11,5 +11,6 @@ class Creator < ApplicationRecord
               "SUM(CASE WHEN payouts.status = 'paid' THEN payouts.amount ELSE 0 END) AS total_paid_amount",
               "COUNT(CASE WHEN payouts.status = 'pending' THEN 1 ELSE NULL END) AS pending_payouts_count")
       .group(:id)
+      .order(:id)
   }
 end
